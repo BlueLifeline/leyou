@@ -16,6 +16,4 @@ public interface BrandApi {
      */
     @GetMapping("list")
     List<Brand> queryBrandByIds(@RequestParam("ids") List<Long> ids);
-    
-    //这里加一段我秀嘎的注释
 }
