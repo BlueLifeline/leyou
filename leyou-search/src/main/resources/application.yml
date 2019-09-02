@@ -1,0 +1,42 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: search-service
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch  #es集群的名称,在es的yml配置文件中有配置
+      cluster-nodes: 192.168.23.130:9300
+  jackson:
+    default-property-inclusion: non_null # 配置json处理时忽略空值
+  main:
+    allow-bean-definition-overriding: true  #设置FeignClient注解的configuration参数可以被覆盖
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true  #当你获取host时，返回的不是主机名，而是ip
+    ip-address: 127.0.0.1
+    lease-expiration-duration-in-seconds: 10 #10秒不发送过期
+    lease-renewal-interval-in-seconds: 5 #每隔5秒发一次心跳
+feign:
+  hystrix:
+    enabled: false
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enable: false
+        isolation:
+          thread:
+            timeoutInMilliseeconds: 10000  #熔断超时时长
+ribbon:
+  ConnectTimout: 6000 #ribbon链接超时时长
+  ReadTimeout: 60000   #ribbon读取超时时长
+  MaxAutoRetries: 1  #当前服务重试次数
+  MaxAutoRetriesNextServer: 2   #切换服务重试次数
+

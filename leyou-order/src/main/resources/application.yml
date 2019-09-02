@@ -1,0 +1,43 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://47.110.54.33:3306/leyou?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+  redis:
+    host: 192.168.23.130
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${eureka.instance.ip-address}.${server.port}
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 10
+mybatis:
+  type-aliases-package: com.leyou.item.pojo
+  mapper-locations: mapper/OrderMapper.xml
+  configuration:
+    map-underscore-to-camel-case: true  #开启属性命名驼峰
+# 自定义属性
+leyou:
+  worker:
+    workerId: 1
+    datacenterId: 1
+  jwt:
+    pubKeyPath:  F:/leyouProject/screatKey/rsa/rsa.pub #公钥地址
+    cookieName: LY_TOKEN # cookie的名称
+  pay:
+    appId:
+    mchId:
+    key:
+    connectTimeoutMs: 5000
+    readTimeoutMs: 10000

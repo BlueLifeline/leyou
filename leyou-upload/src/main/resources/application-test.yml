@@ -1,0 +1,8 @@
+#upload配置
+ly:
+  upload:
+    baseUrl: http://image.leyou.com/
+    allowImageTypes:
+      - image/png
+      - image/jpeg
+      - image/jpg
